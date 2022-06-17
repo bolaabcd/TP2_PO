@@ -7,14 +7,13 @@ int rand(int a, int b) {// [a,b]
 
 int main(int argc, char** argv) {
     srand(atoi(argv[1]));
-	int n = 215, m = rand(215,46225);
+	int n = 215
+	int m = rand(215,min(46225,n*n));
 	cout << n << ' ' << m << endl;
 	vector<pair<int,int>> sortlins(m);
 	for(int i = 0; i < m; i++) {
 		sortlins[i].first = rand(0,n-1);
-		do {
-			sortlins[i].second = rand(0,n-1);
-		} while (sortlins[i].second == sortlins[i].first);
+		sortlins[i].second = n+rand(0,n-1);
 	}
 	for (int i = 0; i < 2*n; i++) {
 		for (int j = 0; j < m; j++) {
