@@ -34,6 +34,7 @@ int bfs(int init) {
 	queue<int> q;
 	q.push(init);
 	marc.clear();
+	marc.resize(2*n,false);
 	marc[init] = true;
 	//averts.clear();
 	//bverts.clear();
@@ -53,14 +54,14 @@ int bfs(int init) {
 					q.push(vis);
 					marc[vis] = true;
 					valid_nei++;
-					paia[vis] = {i,edg_num[min(i,vis)][max(i,vis)]};
+					paia[vis] = {i,edg_num[i][vis]};
 				}
-			} else if(match[edg_num[min(i,vis)][max(i,vis)]]) {
+			} else if(match[edg_num[vis][i]]) {
 				if(!marc[vis]){
 					q.push(vis);
 					marc[vis] =  true;
 					valid_nei++;
-					paia[vis] = {i,edg_num[min(i,vis)][max(i,vis)]};
+					paia[vis] = {i,edg_num[vis][i]};
 				}
 			}
 		}
@@ -103,8 +104,8 @@ int find_perf_matching() {
 			break;
 	}
 	while(!no_pair.empty()) {
-		//averts.clear();
-		//bverts.clear();
+		averts.clear();
+		bverts.clear();
 		int vert = *no_pair.begin();
 		paia.resize(2*n,{-1,-1});
 		int foia_ruim = bfs(vert);
@@ -126,6 +127,7 @@ int find_perf_matching() {
 			int edg = paia[foia_ruim].second;
 			no_pair.erase(foia_ruim);
 			no_other.erase(foia_ruim);
+
 			if(pai == -1)
 				break;
 			match[edg] = !match[edg];
@@ -142,6 +144,7 @@ int find_perf_matching() {
 }
 
 bool change(int val) {
+	assert(averts.size() > bverts.size());
 	for(int i: averts)
 		y[i] += val;
 	for(int i: bverts)
@@ -211,6 +214,7 @@ int main() {
 			break;
 		}
 		int l = 0, r = 0x00100000;
+
 		while(l != r) {
 			int mid = (l + r + 1)/2;
 			auto yc = y;

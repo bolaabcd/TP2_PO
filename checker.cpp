@@ -71,8 +71,8 @@ int main(int argc, char **argv)
 			out >> val;
 			totb += val;
 			if (val) {
-				assert(vizs[val]);// realmente sao os vizinhos
-				confirms[val] = true;
+				assert(vizs[i]);// realmente sao os vizinhos
+				confirms[i] = true;
 			}
 		}
 		for(bool b: confirms)

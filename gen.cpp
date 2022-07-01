@@ -7,19 +7,19 @@ int rand(int a, int b) {// [a,b]
 
 int main(int argc, char** argv) {
     srand(atoi(argv[1]));
-	int n = rand(2,10);
+	int n = rand(3,10);
 	int m = rand(5,min(2*n,15));
-	cout << n << ' ';;
 	vector<pair<int,int>> sortlins;
 	set<int> sorts;
 	for(int i = 0; i < m; i++) {
 		sorts.insert(rand(0,n*n-1));
 	}
 	m = sorts.size();
-	cout << m << endl;
+	cout << n << ' ' << m << endl;
 	for(int i: sorts) {
 		sortlins.push_back({i/n,i%n+n});
 	}
+
 	//for(int i = 0; i < m; i++) {
 	//	sortlins[i].first = rand(0,n-1);
 	//	sortlins[i].second = n+rand(0,n-1);
